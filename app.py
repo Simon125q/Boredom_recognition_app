@@ -1,11 +1,18 @@
+import customtkinter as ctk
+from settings import *
 
 class App:
     def __init__(self) -> None:
-        pass
+        self.root = ctk.CTk()
+        self.set_default_look()
+
+    def set_default_look(self) -> None:
+        self.root.geometry(str(WINDOW_WIDTH) + "x" + str(WINDOW_HEIGHT))
+        self.root.title(TITLE)
+        
 
     def run(self) -> None:
-        while True:
-            pass
+        self.root.mainloop()
 
 
 

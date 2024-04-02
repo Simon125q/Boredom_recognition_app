@@ -5,8 +5,11 @@ import numpy as np
 import os
 import time
 
+
+# name of the CSV file containing collected data
 CSV_FILE_NAME = "coords"
 
+# Detected mesh colors
 FACE_DOTS_COLOR = (80,110,10)
 FACE_CONNECTIONS_COLOR = (80,256,121)
 POSE_DOTS_COLOR = (245,117,66)
