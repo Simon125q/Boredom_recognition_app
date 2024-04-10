@@ -21,9 +21,9 @@ class App:
         
     def menu(self) -> None:
         start_button = ctk.CTkButton(self.root, text="Start", command=self.start_camera)
-        start_button.pack()
+        start_button.pack(pady = 20)
         game_button = ctk.CTkButton(self.root, text="Example Game", command=self.exampleGame.show)
-        game_button.pack()
+        game_button.pack(pady = 20)
 
     def run(self) -> None:
         self.root.mainloop()
