@@ -52,4 +52,4 @@ if __name__ == "__main__":
     modelTrainer = ModelTrainer("coords.csv")
     modelTrainer.train_models()
     modelTrainer.evaluate_models()
-    modelTrainer.save_models("pose_estimation")
+    modelTrainer.save_models("models/")

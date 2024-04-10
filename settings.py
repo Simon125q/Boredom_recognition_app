@@ -1,6 +1,7 @@
 
 # name of the CSV file containing collected data
 CSV_FILE_NAME = "coords"
+RANDOM_FOREST_MODEL = "models/rf_model.pkl"
 
 # Detected mesh colors
 FACE_DOTS_COLOR = (80,110,10)
