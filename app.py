@@ -20,10 +20,16 @@ class App:
         self.detector.start()
         
     def menu(self) -> None:
+        app_name = ctk.CTkLabel(self.root, text=APP_NAME)
+        app_name.pack(pady = 40)
         start_button = ctk.CTkButton(self.root, text="Start", command=self.start_camera)
         start_button.pack(pady = 20)
-        game_button = ctk.CTkButton(self.root, text="Example Game", command=self.exampleGame.show)
-        game_button.pack(pady = 20)
+        stats_button = ctk.CTkButton(self.root, text="Statistics")
+        stats_button.pack(pady = 20)
+        sett_button = ctk.CTkButton(self.root, text="Settings")
+        sett_button.pack(pady = 20)
+        about_button = ctk.CTkButton(self.root, text="About")
+        about_button.pack(pady = 20)
 
     def run(self) -> None:
         self.root.mainloop()
