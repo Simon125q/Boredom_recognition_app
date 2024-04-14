@@ -2,6 +2,7 @@ import customtkinter as ctk
 from abc import ABC, abstractmethod
 from settings import *
 
+
 class AbstractGame(ABC):
     def __init__(self) -> None:
         self.root = ctk.CTk()
