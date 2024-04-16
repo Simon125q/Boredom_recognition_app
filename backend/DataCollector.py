@@ -40,6 +40,17 @@ class DataCollector():
     def get_class_name(self):
         self.class_name = input("Enter name of the presenting expression: ").lower()
 
+    def get_source(self) -> int | str:
+        source = input("Provide data source, ('camera' if you want to record it): ")
+        if source == "camera":
+            return 0
+        else:
+            return source
+
+    def get_info(self) -> int | str:
+        self.get_class_name()
+        return self.get_source()
+
     def timer(self):
         print("3")
         time.sleep(1)
@@ -100,13 +111,15 @@ class DataCollector():
         except:
             pass
 
-    def video_capture(self):
-        cap = cv2.VideoCapture(0)
+    def video_capture(self, data_source: str | int):
+        cap = cv2.VideoCapture(data_source)
         # Initiate holistic model
         with self.mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
             
             while cap.isOpened():
                 ret, frame = cap.read()
+                if not ret:
+                    break
                 
                 # Recolor Feed
                 image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -114,6 +127,7 @@ class DataCollector():
                 
                 # Make Detections
                 results = holistic.process(image)
+
 
                 image.flags.writeable = True
                 # Recolor image back to BGR for rendering
@@ -125,7 +139,7 @@ class DataCollector():
                 
                 cv2.imshow('Raw Webcam Feed', image)
 
-                if cv2.waitKey(10) & 0xFF == ord('q'):
+                if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
 
         cap.release()
@@ -133,9 +147,9 @@ class DataCollector():
 
     def run(self):
         while True:
-            self.get_class_name()
+            source: str | int = self.get_info()
             self.timer()
-            self.video_capture()
+            self.video_capture(source)
             x = input("Do you want to add another data? y/n ")
             if x.upper() == "N":
                 break
