@@ -20,6 +20,7 @@ class ModelTrainer:
                         }
         self.fit_models = {}
         df = pd.read_csv(self.file_name)
+        df = df.dropna()
         self.X = df.drop('class', axis = 1) # features
         self.y = df["class"] # target value
 

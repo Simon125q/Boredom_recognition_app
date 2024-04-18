@@ -2,6 +2,8 @@ import customtkinter as ctk
 from settings import *
 from frontend.Detector import Detector
 from frontend.mini_games.example_game import ExampleGame
+import warnings
+warnings.filterwarnings("ignore")
 
 
 class App:
@@ -20,6 +22,7 @@ class App:
         self.detector.start()
         
     def menu(self) -> None:
+        
         app_name = ctk.CTkLabel(self.root, text=APP_NAME)
         app_name.pack(pady = 40)
         start_button = ctk.CTkButton(self.root, text="Start", command=self.start_camera)

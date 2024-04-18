@@ -1,3 +1,9 @@
+# model tuning parameters tresholds
+
+EYES_SQUINTED = 0.30
+EYES_CLOSED = 0.24
+
+MOUTH_CLOSED = 0.30
 
 # name of the CSV file containing collected data
 CSV_FILE_NAME = "coords"

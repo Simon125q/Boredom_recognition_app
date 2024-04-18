@@ -1,14 +1,18 @@
 from settings import *
 from backend.PoseDetector import PoseDetector
+from backend.AspectRatioDetector import AspectRatioDetector
 import mediapipe as mp
 import numpy as np
 import cv2
+
+
 
 class Detector:
     def __init__(self) -> None:
         self.mp_drawing = mp.solutions.drawing_utils
         self.mp_holistic = mp.solutions.holistic
         self.poseDetector = PoseDetector(RANDOM_FOREST_MODEL)
+        self.aspectRatioDetector = AspectRatioDetector()
         pass
 
     def draw_landmarks(self, results, image) -> np.ndarray:
@@ -37,7 +41,7 @@ class Detector:
         
         return image
 
-    def draw_results(self, results, image, body_language_class: str, body_language_prob: float) -> np.ndarray:
+    def draw_results(self, results, image, body_language_class: str, body_language_prob: float, ear: float, eyes: str, mar: float, mouth: str) -> np.ndarray:
         # Grab ear coords
         coords = tuple(np.multiply(
                         np.array(
@@ -53,10 +57,10 @@ class Detector:
                     cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
         
         # Get status box
-        cv2.rectangle(image, (0,0), (250, 60), (245, 117, 16), -1)
+        cv2.rectangle(image, (0,0), (250, 150), (245, 117, 16), -1)
         
         # Display Class
-        cv2.putText(image, 'CLASS'
+        cv2.putText(image, 'POSE'
                     , (95,12), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv2.LINE_AA)
         cv2.putText(image, body_language_class.split(' ')[0]
                     , (90,40), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
@@ -66,6 +70,30 @@ class Detector:
                     , (15,12), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv2.LINE_AA)
         cv2.putText(image, str(round(body_language_prob,2))
                     , (10,40), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+        
+        # Display name
+        cv2.putText(image, 'EYES'
+                    , (95,60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv2.LINE_AA)
+        cv2.putText(image, eyes
+                    , (90,88), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+        
+        # Display EAR
+        cv2.putText(image, 'EAR'
+                    , (15,60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv2.LINE_AA)
+        cv2.putText(image, str(round(ear,2))
+                    , (10,88), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+        
+        # Display name
+        cv2.putText(image, 'MOUTH'
+                    , (95,110), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv2.LINE_AA)
+        cv2.putText(image, mouth
+                    , (90,138), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+        
+        # Display MAR
+        cv2.putText(image, 'MAR'
+                    , (15,110), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv2.LINE_AA)
+        cv2.putText(image, str(round(mar,2))
+                    , (10,138), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
         
         return image
         
@@ -92,8 +120,10 @@ class Detector:
                 
                 try:
                     body_language_class, body_language_prob = self.poseDetector.detect(results.pose_landmarks, results.face_landmarks)
-                    
-                    image = self.draw_results(results, image, body_language_class, body_language_prob)
+                    ear, eyes = self.aspectRatioDetector.detect_ear(results.face_landmarks)
+                    mar, mouth = self.aspectRatioDetector.detect_mar(results.face_landmarks)
+                        
+                    image = self.draw_results(results, image, body_language_class, body_language_prob, ear, eyes, mar, mouth)
                 except:
                     pass
                                 
