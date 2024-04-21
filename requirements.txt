@@ -1,0 +1,7 @@
+customtkinter
+fer
+mediapipe
+pandas
+numpy
+sklearn
+python-cv2

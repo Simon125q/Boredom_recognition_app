@@ -4,7 +4,7 @@ from backend.AspectRatioDetector import AspectRatioDetector
 import mediapipe as mp
 import numpy as np
 import cv2
-
+from backend.GameHandler import GameHandler
 
 
 class Detector:
@@ -13,7 +13,7 @@ class Detector:
         self.mp_holistic = mp.solutions.holistic
         self.poseDetector = PoseDetector(RANDOM_FOREST_MODEL)
         self.aspectRatioDetector = AspectRatioDetector()
-        pass
+        self.gameHandler = GameHandler()
 
     def draw_landmarks(self, results, image) -> np.ndarray:
         self.mp_drawing.draw_landmarks(image, results.face_landmarks, self.mp_holistic.FACEMESH_TESSELATION, 
@@ -117,12 +117,12 @@ class Detector:
                 image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
                 
                 image = self.draw_landmarks(results, image)
-                
+        
                 try:
                     body_language_class, body_language_prob = self.poseDetector.detect(results.pose_landmarks, results.face_landmarks)
                     ear, eyes = self.aspectRatioDetector.detect_ear(results.face_landmarks)
                     mar, mouth = self.aspectRatioDetector.detect_mar(results.face_landmarks)
-                        
+                    self.gameHandler.get_data(body_language_class, body_language_prob, ear, eyes, mar, mouth)                        
                     image = self.draw_results(results, image, body_language_class, body_language_prob, ear, eyes, mar, mouth)
                 except:
                     pass
