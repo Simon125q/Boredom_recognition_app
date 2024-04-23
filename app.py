@@ -1,8 +1,8 @@
 import customtkinter as ctk
 from settings import *
 from frontend.Detector import Detector
-from frontend.mini_games.example_game import ExampleGame
 import warnings
+import threading
 warnings.filterwarnings("ignore")
 
 
@@ -10,16 +10,17 @@ class App:
     def __init__(self) -> None:
         self.detector = Detector()
         self.root = ctk.CTk()
-        self.exampleGame = ExampleGame()
         self.set_default_look()
 
     def set_default_look(self) -> None:
+        self.root.protocol("WM_DELETE_WINDOW", self.close)
         self.root.geometry(str(WINDOW_WIDTH) + "x" + str(WINDOW_HEIGHT))
         self.root.title(TITLE)
         self.menu()
 
     def start_camera(self) -> None:
-        self.detector.start()
+        detector_thread = threading.Thread(target=self.detector.start)
+        detector_thread.start()
         
     def menu(self) -> None:
         
@@ -33,6 +34,9 @@ class App:
         sett_button.pack(pady = 20)
         about_button = ctk.CTkButton(self.root, text="About")
         about_button.pack(pady = 20)
+
+    def close(self) -> None:
+        self.root.quit()
 
     def run(self) -> None:
         self.root.mainloop()

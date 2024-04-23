@@ -98,8 +98,12 @@ class Detector:
         return image
         
     def start(self) -> None:
-        
-        cap = cv2.VideoCapture(0)
+        for i in range(10):
+            try:
+                cap = cv2.VideoCapture(i)
+                break
+            except:
+                pass
         # Initiate holistic model
         with self.mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
             while cap.isOpened():
