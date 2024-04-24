@@ -1,4 +1,4 @@
-from frontend.mini_games.AbstractGame import AbstractGame
+from AbstractGame import AbstractGame
 import customtkinter as ctk
 import random
 
@@ -58,7 +58,7 @@ class ExercisesGame(AbstractGame):
         self.root.geometry("700x700")
         self.root.update()
 
-        exercise_name, exercise_time = self.getExerciseFromFile("exercises.txt")
+        exercise_name, exercise_time = self.getExerciseFromFile("frontend/mini_games/exercises.txt")
 
         self.exercise_label = ctk.CTkLabel(self.root, text=f"Exercise: {exercise_name}")
         custom_font = ctk.CTkFont(family='helvetica', size=40)

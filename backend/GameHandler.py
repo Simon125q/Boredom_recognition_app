@@ -6,15 +6,11 @@ from random import choice
 
 class GameHandler:
     def __init__(self) -> None:
+        self.gameStatus = False
         self.games = list()
-        self.initGames()
         self.initMarkContainers()
         self.startTimer()
 
-    def initGames(self) -> None:
-        if CONNECT_DOTS_ENABLE:
-            self.dotsGame = DotsGame()
-            self.games.append(self.dotsGame)
     
     def initMarkContainers(self) -> None:
         self.earQueue = MaxSizeQueue(500)
@@ -29,15 +25,21 @@ class GameHandler:
             return False
         else:
             return True
-
+    
+    def getGameStatus(self) -> bool:
+        return self.gameStatus
+    
+    def resetGameStatus(self) -> None:
+        self.gameStatus = False
+        
     def handleGame(self) -> None:
-        mouth = self.marQueue.getMax(50)
-        eyes = self.earQueue.getMax(100)
+        mouth = self.marQueue.getMax(40)
+        eyes = self.earQueue.getMax(50)
         pose = self.poseQueue.getMax(250)
         print(mouth, eyes, pose)
         if mouth[0] == 'open' or eyes[0] in ["closed", "squinted"] or pose[0] == "half-lie":
             print("game")
-            TimeToRunGame = True
+            self.gameStatus = True
             #game = choice(self.games)
             #game.show()
             self.startTimer()
@@ -47,7 +49,7 @@ class GameHandler:
         self.marQueue.add(mouth)
         self.poseQueue.add(pose)
         timeUp = self.checkTime(TIME_BETWEEN_GAMES)
-        if timeUp and len(self.earQueue) > 200 and len(self.marQueue) > 200 and len(self.poseQueue) > 200:
+        if timeUp:
             self.handleGame()
 
 

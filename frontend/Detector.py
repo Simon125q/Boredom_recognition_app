@@ -96,6 +96,12 @@ class Detector:
                     , (10,138), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
         
         return image
+    
+    def getGameStatus(self) -> bool:
+        return self.gameHandler.getGameStatus()
+
+    def resetGameStatus(self) -> None:
+        self.gameHandler.resetGameStatus()
         
     def start(self) -> None:
         for i in range(10):
