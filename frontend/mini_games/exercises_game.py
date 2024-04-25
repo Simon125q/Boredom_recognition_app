@@ -1,4 +1,4 @@
-from AbstractGame import AbstractGame
+from frontend.mini_games.AbstractGame import AbstractGame
 import customtkinter as ctk
 import random
 
@@ -74,9 +74,8 @@ class ExercisesGame(AbstractGame):
         self.timer = TimerApp(self.root, self.exercise_label, self.button, exercise_time)
 
     def set_finished_flag(self):
-        print("Button clicked")
         self.finished_flag = True
-        self.root.quit()
+        self.close()
 
     @staticmethod
     def getExerciseFromFile(file_path):

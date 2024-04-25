@@ -106,7 +106,7 @@ class DotsGame(AbstractGame):
             self.info_label.configure(text="Congratulations! You've connected all dots.")
             self.timer.running = False
             score = 100 - (self.timer.seconds // 2)
-            self.root.destroy() 
+            self.close()
 
     def draw_line(self, dot1, dot2) -> None:
         x1, y1 = dot1.x, dot1.y
@@ -117,9 +117,10 @@ class DotsGame(AbstractGame):
         return random.choice(self.all_patterns)
 
     def show(self) -> int:
-        print("dots game show")
         self.restart()
-        self.root.mainloop()
+        while self.running:
+            self.root.update_idletasks()
+            self.root.update()
 
         return score
 

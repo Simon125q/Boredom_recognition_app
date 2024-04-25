@@ -1,6 +1,6 @@
 from random import choice
 from frontend.mini_games.connect_the_dots_game import DotsGame
-#from frontend.mini_games.exercises_game import ExercisesGame 
+from frontend.mini_games.exercises_game import ExercisesGame 
 import customtkinter as ctk
 from settings import *
 from frontend.Detector import Detector
@@ -20,9 +20,15 @@ class App:
 
     def initGames(self) -> None:
         if CONNECT_DOTS_ENABLE:
-            self.games.append("dots")
+            self.games.append(GameType.DOTS)
         if EXCERCISE_ENABLE:
-            self.games.append("excercise")
+            self.games.append(GameType.EXCERCISE)
+        if SNAKE_ENABLE:
+            self.games.append(GameType.SNAKE)
+        if MEMORY_ENABLE:
+            self.games.append(GameType.MEMORY)
+        if ALARM_ENABLE:
+            self.games.append(GameType.ALARM)
 
     def set_default_look(self) -> None:
         self.root.protocol("WM_DELETE_WINDOW", self.close)
@@ -36,9 +42,10 @@ class App:
 
     def startRandomGame(self) -> None:
         randGame = choice(self.games)
-        if randGame == "dots":
-            print("new game")
+        if randGame == GameType.DOTS:
             game = DotsGame()
+        elif randGame == GameType.EXCERCISE:
+            game = ExercisesGame()
         game.show()
         
     def checkGameStatus(self) -> None:
@@ -68,7 +75,7 @@ class App:
         while self.running:
             self.root.update_idletasks()
             self.root.update()
-            self.checkGameStatus() 
+            self.checkGameStatus()
             
 
 if __name__ == "__main__":

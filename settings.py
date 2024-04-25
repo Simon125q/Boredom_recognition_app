@@ -1,4 +1,4 @@
-
+from enum import Enum
 TimeToRunGame = False
 
 # model tuning parameters tresholds
@@ -27,9 +27,16 @@ TITLE = "Personal supervisor"
 APP_NAME = "App Name"
 
 # User settings
-TIME_BETWEEN_GAMES = 30
-CONNECT_DOTS_ENABLE = 1
-EXCERCISE_ENABLE = 0
-SNAKE_ENABLE = 0
-MEMORY_ENABLE = 0
-ALARM_ENABLE = 0
+TIME_BETWEEN_GAMES = 45
+CONNECT_DOTS_ENABLE = True
+EXCERCISE_ENABLE = True
+SNAKE_ENABLE = False
+MEMORY_ENABLE = False
+ALARM_ENABLE = False
+
+class GameType(Enum):
+    DOTS = 1
+    EXCERCISE = 2
+    SNAKE = 3
+    MEMORY = 4
+    ALARM = 5

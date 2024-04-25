@@ -11,6 +11,7 @@ class AbstractGame(ABC):
         self.root = ctk.CTk()
         self.root.geometry(str(WINDOW_WIDTH) + "x" + str(WINDOW_HEIGHT))
         self.root.title(TITLE)
+        self.running = True
     #    self.root.protocol("WM_DELETE_WINDOW", self.close)
 
     def close(self) -> None:
