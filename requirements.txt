@@ -3,5 +3,5 @@ fer
 mediapipe
 pandas
 numpy
-sklearn
+scikit-learn
 python-cv2
