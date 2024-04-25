@@ -25,7 +25,7 @@ class MaxSizeQueue:
             data = self.elements[self.currSize - elemBack:]
 
         vals = [(x, data.count(x)) for x in set(data)]
-        print(sorted(vals, key=lambda x: x[1]))
+        
         max_val = max(vals, key = lambda x: x[1])
         return (max_val[0], round(max_val[1]/len(data), 3))
 

@@ -96,10 +96,20 @@ class Detector:
                     , (10,138), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
         
         return image
+    
+    def getGameStatus(self) -> bool:
+        return self.gameHandler.getGameStatus()
+
+    def resetGameStatus(self) -> None:
+        self.gameHandler.resetGameStatus()
         
     def start(self) -> None:
-        
-        cap = cv2.VideoCapture(0)
+        for i in range(10):
+            try:
+                cap = cv2.VideoCapture(i)
+                break
+            except:
+                pass
         # Initiate holistic model
         with self.mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
             while cap.isOpened():

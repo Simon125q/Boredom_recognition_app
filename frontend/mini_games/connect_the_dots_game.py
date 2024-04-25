@@ -1,7 +1,8 @@
 from frontend.mini_games.AbstractGame import AbstractGame
 import customtkinter as ctk
 import random
-import dot_patterns
+import frontend.mini_games.dot_patterns as dot_patterns
+from settings import *
 
 
 '''700x400 is center more or less'''
@@ -36,7 +37,11 @@ class TimerApp:
 
 class DotsGame(AbstractGame):
     def __init__(self) -> None:
+        print("dots game init")
         super().__init__()
+
+    def restart(self) -> None:
+        self.init_root()
         self.info_label = None
         self.selected_point = None
         self.points = None
@@ -73,10 +78,10 @@ class DotsGame(AbstractGame):
 
         for dot in self.points:
             x, y = dot.x, dot.y
-            self.canvas.create_oval(x - 5, y - 5, x + 5, y + 5, fill="black")
+            self.canvas.create_oval(x - 10, y - 10, x + 10, y + 10, fill="black")
             self.canvas.create_text(x, y + 15, text=str(dot.number))
 
-        self.canvas.bind("<Button-1>", self.on_canvas_click)
+        self.canvas.bind("<Motion>", self.on_canvas_click)
 
     def find_closest_point(self, x, y):
         return min(self.points, key=lambda dot: ((dot.x - x) ** 2 + (dot.y - y) ** 2) ** 0.5)
@@ -101,17 +106,19 @@ class DotsGame(AbstractGame):
             self.info_label.configure(text="Congratulations! You've connected all dots.")
             self.timer.running = False
             score = 100 - (self.timer.seconds // 2)
-            self.root.quit()
+            self.root.destroy() 
 
     def draw_line(self, dot1, dot2) -> None:
         x1, y1 = dot1.x, dot1.y
         x2, y2 = dot2.x, dot2.y
-        self.canvas.create_line(x1, y1, x2, y2, fill="blue", width=2)
+        self.canvas.create_line(x1, y1, x2, y2, fill="blue", width=4)
 
     def randomise_dots(self):
         return random.choice(self.all_patterns)
 
     def show(self) -> int:
+        print("dots game show")
+        self.restart()
         self.root.mainloop()
 
         return score

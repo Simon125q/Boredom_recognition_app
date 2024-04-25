@@ -1,5 +1,7 @@
-# model tuning parameters tresholds
 
+TimeToRunGame = False
+
+# model tuning parameters tresholds
 EYES_SQUINTED = 0.30
 EYES_CLOSED = 0.24
 
@@ -23,3 +25,11 @@ LEFT_HAND_CONNECTIONS_COLOR = (121,44,250)
 WINDOW_SIZE = (WINDOW_WIDTH, WINDOW_HEIGHT) = (900, 600)
 TITLE = "Personal supervisor"
 APP_NAME = "App Name"
+
+# User settings
+TIME_BETWEEN_GAMES = 30
+CONNECT_DOTS_ENABLE = 1
+EXCERCISE_ENABLE = 0
+SNAKE_ENABLE = 0
+MEMORY_ENABLE = 0
+ALARM_ENABLE = 0
