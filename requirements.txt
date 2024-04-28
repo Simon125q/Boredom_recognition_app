@@ -6,3 +6,4 @@ numpy
 scikit-learn
 python-cv2
 PIL
+pygame

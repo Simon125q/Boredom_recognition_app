@@ -1,11 +1,15 @@
 import customtkinter as ctk
 from abc import ABC, abstractmethod
 from settings import *
+import pygame
 
 
 class AbstractGame(ABC):
     def __init__(self) -> None:
         self.init_root()
+        pygame.mixer.init()
+        pygame.mixer.music.load("assets/interface-3.mp3")
+        pygame.mixer.music.play()
 
     def init_root(self) -> None:
         self.root = ctk.CTkToplevel()

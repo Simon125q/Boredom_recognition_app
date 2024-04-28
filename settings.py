@@ -6,7 +6,6 @@ def importSettings() -> dict:
        settings = json.load(settingsFile)
     return settings
 
-
 # model tuning parameters tresholds
 EYES_SQUINTED = 0.30
 EYES_CLOSED = 0.24
