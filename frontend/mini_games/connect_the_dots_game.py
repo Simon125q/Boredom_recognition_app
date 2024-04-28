@@ -52,7 +52,9 @@ class DotsGame(AbstractGame):
         
 
     def init_game(self) -> None:
-        self.root.geometry("1600x900")
+        dx = int(self.root.winfo_screenwidth() / 2 - 1600 / 2)
+        dy = int(self.root.winfo_screenheight() / 2 - 900 / 2) 
+        self.root.geometry(str(1600) + "x" + str(900) + f"+{dx}+{dy}") 
         self.timer = None
 
         # adding more patterns here:

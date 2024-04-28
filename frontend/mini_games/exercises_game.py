@@ -55,7 +55,9 @@ class ExercisesGame(AbstractGame):
 
     def init_game(self) -> None:
         global score
-        self.root.geometry("700x700")
+        dx = int(self.root.winfo_screenwidth() / 2 - 700 / 2)
+        dy = int(self.root.winfo_screenheight() / 2 - 700 / 2) 
+        self.root.geometry(str(700) + "x" + str(700) + f"+{dx}+{dy}") 
         self.root.update()
 
         exercise_name, exercise_time = self.getExerciseFromFile("frontend/mini_games/exercises.txt")

@@ -9,7 +9,9 @@ class AbstractGame(ABC):
 
     def init_root(self) -> None:
         self.root = ctk.CTkToplevel()
-        self.root.geometry(str(WINDOW_WIDTH) + "x" + str(WINDOW_HEIGHT))
+        dx = int(self.root.winfo_screenwidth() / 2 - WINDOW_WIDTH / 2)
+        dy = int(self.root.winfo_screenheight() / 2 - WINDOW_HEIGHT / 2) 
+        self.root.geometry(str(WINDOW_WIDTH) + "x" + str(WINDOW_HEIGHT) + f"+{dx}+{dy}")       
         self.root.title(TITLE)
         self.root.lift()  # lift window on top
         self.root.attributes("-topmost", True)  # stay on top

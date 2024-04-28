@@ -14,6 +14,7 @@ import threading
 warnings.filterwarnings("ignore")
 
 
+
 class App(ctk.CTk):
     def __init__(self) -> None:
         super().__init__()
@@ -37,10 +38,13 @@ class App(ctk.CTk):
             self.games.append(GameType.ALARM)
         if SETTINGS["gamesEnable"]["TicTacToe"]:
             self.games.append(GameType.TICTACTOE)
-            
+                  
     def set_default_look(self) -> None:
+        self.resizable(False, False)
         self.protocol("WM_DELETE_WINDOW", self.close)
-        self.geometry(str(WINDOW_WIDTH) + "x" + str(WINDOW_HEIGHT))
+        dx = int(self.winfo_screenwidth() / 2 - WINDOW_WIDTH / 2)
+        dy = int(self.winfo_screenheight() / 2 - WINDOW_HEIGHT / 2) 
+        self.geometry(str(WINDOW_WIDTH) + "x" + str(WINDOW_HEIGHT) + f"+{dx}+{dy}")
         self.title(TITLE)
         self.openMenu()
 
