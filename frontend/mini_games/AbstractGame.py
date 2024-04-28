@@ -16,8 +16,6 @@ class AbstractGame(ABC):
         self.root.protocol("WM_DELETE_WINDOW", self.close)
         self.root.resizable(False, False)
         self.root.grab_set()  # make other windows not clickable
-        self.running = True
-    #    self.root.protocol("WM_DELETE_WINDOW", self.close)
 
     def close(self) -> None:
         self.root.grab_release()

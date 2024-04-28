@@ -47,7 +47,7 @@ class GameHandler:
         self.earQueue.add(eyes)
         self.marQueue.add(mouth)
         self.poseQueue.add(pose)
-        timeUp = self.checkTime(TIME_BETWEEN_GAMES)
+        timeUp = self.checkTime(SETTINGS["breakTime"])
         if timeUp:
             self.handleGame()
 

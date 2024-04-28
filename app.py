@@ -25,17 +25,20 @@ class App(ctk.CTk):
         self.initGames()
 
     def initGames(self) -> None:
-        if CONNECT_DOTS_ENABLE:
+        print(SETTINGS)
+        if SETTINGS["gamesEnable"]["DotsGame"]:
             self.games.append(GameType.DOTS)
-        if EXCERCISE_ENABLE:
+        if SETTINGS["gamesEnable"]["Excercises"]:
             self.games.append(GameType.EXCERCISE)
-        if SNAKE_ENABLE:
+        if SETTINGS["gamesEnable"]["Snake"]:
             self.games.append(GameType.SNAKE)
-        if MEMORY_ENABLE:
+        if SETTINGS["gamesEnable"]["Memory"]:
             self.games.append(GameType.MEMORY)
-        if ALARM_ENABLE:
+        if SETTINGS["gamesEnable"]["Alarm"]:
             self.games.append(GameType.ALARM)
-
+        if SETTINGS["gamesEnable"]["TicTacToe"]:
+            self.games.append(GameType.TICTACTOE)
+            
     def set_default_look(self) -> None:
         self.protocol("WM_DELETE_WINDOW", self.close)
         self.geometry(str(WINDOW_WIDTH) + "x" + str(WINDOW_HEIGHT))

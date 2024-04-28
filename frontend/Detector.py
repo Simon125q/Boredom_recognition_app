@@ -131,7 +131,8 @@ class Detector:
                 image.flags.writeable = True   
                 image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
                 
-                image = self.draw_landmarks(results, image)
+                if SETTINGS["camera"]:
+                    image = self.draw_landmarks(results, image)
         
                 try:
                     body_language_class, body_language_prob = self.poseDetector.detect(results.pose_landmarks, results.face_landmarks)
@@ -141,8 +142,9 @@ class Detector:
                     image = self.draw_results(results, image, body_language_class, body_language_prob, ear, eyes, mar, mouth)
                 except:
                     pass
-                                
-                cv2.imshow('Webcam', image)
+                
+                if SETTINGS["camera"]:
+                    cv2.imshow('Webcam', image)
 
                 if cv2.waitKey(10) & 0xFF == ord('q'):
                     break

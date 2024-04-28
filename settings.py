@@ -1,5 +1,11 @@
+import json
 from enum import Enum
-TimeToRunGame = False
+
+def importSettings() -> dict:
+    with open("mySettings.json", "r") as settingsFile:
+       settings = json.load(settingsFile)
+    return settings
+
 
 # model tuning parameters tresholds
 EYES_SQUINTED = 0.30
@@ -27,12 +33,13 @@ TITLE = "Focus Guard"
 APP_NAME = "Focus Guard"
 
 # User settings
-TIME_BETWEEN_GAMES = 30
+SETTINGS = importSettings()
+""" TIME_BETWEEN_GAMES = 30
 CONNECT_DOTS_ENABLE = True
 EXCERCISE_ENABLE = True
 SNAKE_ENABLE = False
 MEMORY_ENABLE = False
-ALARM_ENABLE = False
+ALARM_ENABLE = False """
 
 class GameType(Enum):
     DOTS = 1
@@ -40,3 +47,4 @@ class GameType(Enum):
     SNAKE = 3
     MEMORY = 4
     ALARM = 5
+    TICTACTOE = 6

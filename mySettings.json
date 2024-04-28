@@ -1,0 +1,13 @@
+{
+    "gamesEnable":{
+        "DotsGame":1,
+        "Excercises":1,
+        "Snake":0,
+        "Memory":0,
+        "TicTacToe":0,
+        "Alarm":0
+    },
+    "camera":0,
+    "breakTime":200
+    
+}
