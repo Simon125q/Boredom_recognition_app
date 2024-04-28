@@ -8,14 +8,20 @@ class AbstractGame(ABC):
         self.init_root()
 
     def init_root(self) -> None:
-        self.root = ctk.CTk()
+        self.root = ctk.CTkToplevel()
         self.root.geometry(str(WINDOW_WIDTH) + "x" + str(WINDOW_HEIGHT))
         self.root.title(TITLE)
+        self.root.lift()  # lift window on top
+        self.root.attributes("-topmost", True)  # stay on top
+        self.root.protocol("WM_DELETE_WINDOW", self.close)
+        self.root.resizable(False, False)
+        self.root.grab_set()  # make other windows not clickable
         self.running = True
     #    self.root.protocol("WM_DELETE_WINDOW", self.close)
 
     def close(self) -> None:
-        self.root.quit()
+        self.root.grab_release()
+        self.root.destroy()
         self.running = False
     
 

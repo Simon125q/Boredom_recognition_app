@@ -88,11 +88,9 @@ class ExercisesGame(AbstractGame):
 
     def show(self) -> int:
         global score
-        self.root.mainloop()
-
+        self.root.master.wait_window(self.root)
         if self.finished_flag is True:
             score = 100 - (abs(self.timer.seconds) // 2)
-            print("Score:", score)
 
         return score
 

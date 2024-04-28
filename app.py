@@ -52,7 +52,8 @@ class App(ctk.CTk):
             game = DotsGame()
         elif randGame == GameType.EXCERCISE:
             game = ExercisesGame()
-        game.show()
+        points = game.show()
+        print(points)
         
     def checkGameStatus(self) -> None:
         if self.detector.getGameStatus():
@@ -61,6 +62,7 @@ class App(ctk.CTk):
             self.detector.gameHandler.startTimer()
 
     def close(self) -> None:
+        self.detector.closeCamera()
         self.quit()
         self.running = False
     

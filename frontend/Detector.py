@@ -102,18 +102,23 @@ class Detector:
 
     def resetGameStatus(self) -> None:
         self.gameHandler.resetGameStatus()
+
+    def closeCamera(self) -> None:
+        self.cap.release()
+        cv2.destroyAllWindows()
+
         
     def start(self) -> None:
         for i in range(10):
             try:
-                cap = cv2.VideoCapture(i)
+                self.cap = cv2.VideoCapture(i)
                 break
             except:
                 pass
         # Initiate holistic model
         with self.mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
-            while cap.isOpened():
-                ret, frame = cap.read()
+            while self.cap.isOpened():
+                ret, frame = self.cap.read()
                 
                 # Recolor Feed
                 image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -137,10 +142,8 @@ class Detector:
                 except:
                     pass
                                 
-                cv2.imshow('Raw Webcam Feed', image)
+                cv2.imshow('Webcam', image)
 
                 if cv2.waitKey(10) & 0xFF == ord('q'):
                     break
-
-        cap.release()
-        cv2.destroyAllWindows()
+            self.closeCamera()

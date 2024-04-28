@@ -41,7 +41,6 @@ class DotsGame(AbstractGame):
         super().__init__()
 
     def restart(self) -> None:
-        self.init_root()
         self.info_label = None
         self.selected_point = None
         self.points = None
@@ -50,6 +49,7 @@ class DotsGame(AbstractGame):
         self.next_point_needed = 1
         self.timer = TimerApp(self.root)
         self.all_patterns = None
+        
 
     def init_game(self) -> None:
         self.root.geometry("1600x900")
@@ -118,10 +118,7 @@ class DotsGame(AbstractGame):
 
     def show(self) -> int:
         self.restart()
-        while self.running:
-            self.root.update_idletasks()
-            self.root.update()
-
+        self.root.master.wait_window(self.root)
         return score
 
 
