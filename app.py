@@ -13,8 +13,6 @@ import warnings
 import threading
 warnings.filterwarnings("ignore")
 
-
-
 class App(ctk.CTk):
     def __init__(self) -> None:
         super().__init__()
@@ -82,23 +80,23 @@ class App(ctk.CTk):
     def startApp(self) -> None:
         self.hideFrames()
         self.start_camera()
-        self.appStart.pack()
+        self.appStart.pack(fill="both", expand=True)
 
     def openStats(self) -> None:
         self.hideFrames()
-        self.stats.pack()
+        self.stats.pack(fill="both", expand=True)
     
     def openSettings(self) -> None:
         self.hideFrames()
-        self.settings.pack() 
+        self.settings.pack(fill="both", expand=True)
 
     def openAbout(self) -> None:
         self.hideFrames()
-        self.about.pack()
+        self.about.pack(fill="both", expand=True)
 
     def openMenu(self) -> None:
         self.hideFrames()
-        self.menu.pack()
+        self.menu.pack(fill="both", expand=True)
 
     def hideFrames(self) -> None:
         self.menu.pack_forget()
