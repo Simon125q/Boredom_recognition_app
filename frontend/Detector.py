@@ -104,9 +104,11 @@ class Detector:
         self.gameHandler.resetGameStatus()
 
     def closeCamera(self) -> None:
-        self.cap.release()
-        cv2.destroyAllWindows()
-
+        try:
+            self.cap.release()
+            cv2.destroyAllWindows()
+        except:
+            pass        
         
     def start(self) -> None:
         for i in range(10):

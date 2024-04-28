@@ -25,7 +25,6 @@ class App(ctk.CTk):
         self.initGames()
 
     def initGames(self) -> None:
-        print(SETTINGS)
         if SETTINGS["gamesEnable"]["DotsGame"]:
             self.games.append(GameType.DOTS)
         if SETTINGS["gamesEnable"]["Excercises"]:
