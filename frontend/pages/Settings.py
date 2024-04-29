@@ -33,7 +33,7 @@ class Settings(ctk.CTkFrame):
 
     def initView(self) -> None:
         label = ctk.CTkLabel(self, text="Settings", font=("Helvetica", 75, "bold"))
-        label.pack(anchor="nw")
+        label.pack(anchor="nw", padx=40, pady=20)
 
         toggle_descriptions = ["DotsGame", "Exercises", "Snake", "Memory", "TicTacToe", "Alarm"]
         for description in toggle_descriptions:

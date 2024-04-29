@@ -73,7 +73,7 @@ class DotsGame(AbstractGame):
         self.info_label = ctk.CTkLabel(self.root, text="")
         self.info_label.pack()
 
-        self.canvas = ctk.CTkCanvas(self.root, width=1400, height=800)
+        self.canvas = ctk.CTkCanvas(self.root, width=1400, height=800, bg="#868686")
         self.canvas.pack()
 
         self.points = self.randomise_dots()

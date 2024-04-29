@@ -4,9 +4,9 @@
         "Exercises": 1,
         "Snake": 0,
         "Memory": 0,
-        "TicTacToe": 1,
-        "Alarm": 1
+        "TicTacToe": 0,
+        "Alarm": 0
     },
-    "camera": 1,
-    "breakTime": 50
+    "camera": 0,
+    "breakTime": 35
 }
