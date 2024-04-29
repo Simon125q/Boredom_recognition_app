@@ -10,7 +10,7 @@ class Dot:
 
 
 def populate_patterns():
-    pattern_functions = [generate_rect_grid(), generate_spiral(), generate_random_dots()]
+    pattern_functions = [generate_rect_grid(), generate_spiral(), generate_concentric_circles(), generate_diamond_grid()]
     patterns = []
     for pattern_func in pattern_functions:
         patterns.append(pattern_func)
@@ -60,13 +60,37 @@ def generate_spiral():
 
     return spiral_dots
 
+def generate_concentric_circles():
+    center_x = 700
+    center_y = 400
+    num_circles = 5
+    num_dots_per_circle = 12
 
-def generate_random_dots():
-    random_dots = []
-    current_number = 1
-    for _ in range(20):
-        x = random.randint(200, 1200)
-        y = random.randint(200, 700)
-        random_dots.append(Dot(x, y, current_number))
-        current_number += 1
-    return random_dots
+    concentric_dots = []
+    for i in range(num_circles):
+        radius = 50 * (i + 1)
+        for j in range(num_dots_per_circle):
+            angle = j * (2 * math.pi / num_dots_per_circle)
+            x = center_x + radius * math.cos(angle)
+            y = center_y + radius * math.sin(angle)
+            concentric_dots.append(Dot(int(x), int(y), (i * num_dots_per_circle) + j + 1))
+
+    return concentric_dots
+
+
+def generate_diamond_grid():
+    center_x = 700
+    center_y = 400
+    grid_size = 100
+    num_rows = 5
+    num_cols = 5
+
+    diamond_dots = []
+    for row in range(num_rows):
+        for col in range(num_cols):
+            x = center_x + (col - num_cols // 2) * grid_size
+            y = center_y + (row - num_rows // 2) * grid_size
+            if (row + col) % 2 == 0:
+                diamond_dots.append(Dot(x, y, len(diamond_dots) + 1))
+
+    return diamond_dots

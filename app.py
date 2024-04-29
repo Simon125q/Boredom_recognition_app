@@ -16,6 +16,7 @@ import warnings
 import threading
 warnings.filterwarnings("ignore")
 
+
 class App(ctk.CTk):
     def __init__(self) -> None:
         super().__init__()
@@ -57,8 +58,8 @@ class App(ctk.CTk):
     def initGames(self) -> None:
         if SETTINGS["gamesEnable"]["DotsGame"]:
             self.games.append(GameType.DOTS)
-        if SETTINGS["gamesEnable"]["Excercises"]:
-            self.games.append(GameType.EXCERCISE)
+        if SETTINGS["gamesEnable"]["Exercises"]:
+            self.games.append(GameType.EXERCISE)
         if SETTINGS["gamesEnable"]["Snake"]:
             self.games.append(GameType.SNAKE)
         if SETTINGS["gamesEnable"]["Memory"]:
@@ -85,7 +86,7 @@ class App(ctk.CTk):
         randGame = choice(self.games)
         if randGame == GameType.DOTS:
             game = DotsGame()
-        elif randGame == GameType.EXCERCISE:
+        elif randGame == GameType.EXERCISE:
             game = ExercisesGame()
         newPoints = game.show()
         self.points += newPoints

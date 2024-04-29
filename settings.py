@@ -6,7 +6,7 @@ def importSettings() -> dict:
        settings = json.load(settingsFile)
     return settings
 
-# model tuning parameters tresholds
+# model tuning parameters thresholds
 EYES_SQUINTED = 0.30
 EYES_CLOSED = 0.24
 
@@ -33,16 +33,17 @@ APP_NAME = "Focus Guard"
 
 # User settings
 SETTINGS = importSettings()
-""" TIME_BETWEEN_GAMES = 30
+'''TIME_BETWEEN_GAMES = 30
 CONNECT_DOTS_ENABLE = True
-EXCERCISE_ENABLE = True
+EXERCISE_ENABLE = True
 SNAKE_ENABLE = False
 MEMORY_ENABLE = False
-ALARM_ENABLE = False """
+ALARM_ENABLE = False'''
+
 
 class GameType(Enum):
     DOTS = 1
-    EXCERCISE = 2
+    EXERCISE = 2
     SNAKE = 3
     MEMORY = 4
     ALARM = 5
