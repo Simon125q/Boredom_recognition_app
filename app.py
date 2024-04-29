@@ -1,3 +1,6 @@
+import os
+from datetime import datetime
+import pandas as pd
 from random import choice
 from frontend.mini_games.connect_the_dots_game import DotsGame
 from frontend.mini_games.exercises_game import ExercisesGame 
@@ -19,9 +22,37 @@ class App(ctk.CTk):
         self.detector = Detector()
         self.games = list()
         self.running = True
+        self.readUserData()
         self.initFrames()
         self.set_default_look()
         self.initGames()
+
+    def readUserData(self) -> None:
+        today = datetime.now()
+        if os.path.exists("userData.csv"):
+            self.data = pd.read_csv("userData.csv")
+        else:
+            self.data = pd.DataFrame(columns=["date", "points", "time_spend"])
+            newRecord = pd.DataFrame([{'date':str(today.date()), 'points': 0, 'time_spend': 0}])
+            self.data = pd.concat([self.data, newRecord], ignore_index=True)
+        last_row = self.data.iloc[-1]
+        if str(datetime.strptime(last_row["date"], "%Y-%m-%d")).split(" ")[0] == str(today.date()):
+            self.points = int(last_row["points"])
+            self.timeSpend = int(last_row["time_spend"])
+        else:
+            self.points = 0
+            self.timeSpend = 0
+
+    def saveCurrData(self) -> None:
+        last_row = self.data.iloc[-1]
+        today = datetime.now()
+        if str(datetime.strptime(last_row["date"], "%Y-%m-%d")).split(" ")[0] == str(today.date()):
+            self.data.loc[self.data.index[-1], "points"] = self.points
+            self.data.loc[self.data.index[-1], "time_spend"] = self.timeSpend
+        else:
+            newRecord = pd.DataFrame([{'date':str(today.date()), 'points': self.points, 'time_spend': self.timeSpend}])
+            self.data = pd.concat([self.data, newRecord], ignore_index=True)
+        self.data.to_csv("userData.csv", index=False) 
 
     def initGames(self) -> None:
         if SETTINGS["gamesEnable"]["DotsGame"]:
@@ -56,8 +87,8 @@ class App(ctk.CTk):
             game = DotsGame()
         elif randGame == GameType.EXCERCISE:
             game = ExercisesGame()
-        points = game.show()
-        print(points)
+        newPoints = game.show()
+        self.points += newPoints
         
     def checkGameStatus(self) -> None:
         if self.detector.getGameStatus():
@@ -67,13 +98,14 @@ class App(ctk.CTk):
 
     def close(self) -> None:
         self.detector.closeCamera()
+        self.saveCurrData()
         self.quit()
         self.running = False
     
     def initFrames(self) -> None:
         self.menu = Menu(self)
         self.about = About(self)
-        self.stats = Stats(self)
+        self.stats = Stats(self, self.data)
         self.settings = Settings(self)
         self.appStart = AppStart(self)
 

@@ -3,9 +3,10 @@ import pandas as pd
 import customtkinter as ctk
 
 class Stats(ctk.CTkFrame):
-    def __init__(self, master, **kwargs) -> None:
+    def __init__(self, master, data, **kwargs) -> None:
         super().__init__(master, **kwargs)
         self.master = master
+        self.data = data
         self.getData()
         self.initView()
 
@@ -32,9 +33,8 @@ class Stats(ctk.CTkFrame):
         self.graphFrame.pack(expand=True, fill="both", side="right")
 
     def getData(self) -> None:
-        #self.data = pd.read_csv("userData.csv")
-        self.points = 3234
-        time = 4589
+        self.points = self.data["points"].sum()
+        time = self.data["time_spend"].sum()
         self.level = self.points // 1000 + 1 
         self.hours = time // 3600
         self.minutes = (time - self.hours * 3600) // 60 
