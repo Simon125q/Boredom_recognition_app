@@ -60,6 +60,7 @@ def generate_spiral():
 
     return spiral_dots
 
+
 def generate_concentric_circles():
     center_x = 700
     center_y = 400
@@ -67,13 +68,15 @@ def generate_concentric_circles():
     num_dots_per_circle = 12
 
     concentric_dots = []
+    current_number = 1
     for i in range(num_circles):
         radius = 50 * (i + 1)
         for j in range(num_dots_per_circle):
             angle = j * (2 * math.pi / num_dots_per_circle)
             x = center_x + radius * math.cos(angle)
             y = center_y + radius * math.sin(angle)
-            concentric_dots.append(Dot(int(x), int(y), (i * num_dots_per_circle) + j + 1))
+            concentric_dots.append(Dot(int(x), int(y), current_number))
+            current_number += 1
 
     return concentric_dots
 
@@ -86,11 +89,13 @@ def generate_diamond_grid():
     num_cols = 5
 
     diamond_dots = []
+    current_number = 1
     for row in range(num_rows):
         for col in range(num_cols):
             x = center_x + (col - num_cols // 2) * grid_size
             y = center_y + (row - num_rows // 2) * grid_size
             if (row + col) % 2 == 0:
-                diamond_dots.append(Dot(x, y, len(diamond_dots) + 1))
+                diamond_dots.append(Dot(x, y, current_number))
+                current_number += 1
 
     return diamond_dots
