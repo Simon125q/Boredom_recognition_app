@@ -26,8 +26,8 @@ class Stats(ctk.CTkFrame):
         self.sideImg = ImageTk.PhotoImage(sideImgData, size=(400,750))
         self.sideCanvas.background = self.sideImg
         self.sideCanvas.create_image(0, 0, image=self.sideImg, anchor="nw")
-        backButton = ctk.CTkButton(self, text="Back", command=self.master.openMenu)
-        self.sideCanvas.create_window(200 - 70, 700, anchor="nw", window=backButton)
+        backButton = ctk.CTkButton(self, width=200, height=50, text="Back", font=ctk.CTkFont(size=30), command=self.master.openMenu)
+        self.sideCanvas.create_window(100, 670, anchor="nw", window=backButton)
         self.sideCanvas.create_text(200, 170, fill="white", font=('Arial', 80, 'bold'), text=str(self.level))
         self.sideCanvas.create_text(200, 365, fill="black", font=('Arial', 30, 'normal'), text=str(self.points))
         self.sideCanvas.create_text(200, 475, fill="black", font=('Arial', 30, 'normal'), text=str(f"{self.hours}h {self.minutes}min"))
@@ -37,7 +37,7 @@ class Stats(ctk.CTkFrame):
         self.graphFrame = ctk.CTkFrame(self)
         self.graphFrame.pack(expand=True, fill="both", side="right")
         barFig, barAx = self.barGraph()
-        barFig.patch.set_facecolor("#61686B")
+        barFig.patch.set_facecolor("#333333")
         barGraphCanvas = FigureCanvasTkAgg(barFig, self.graphFrame)
         barGraphCanvas.draw()
         barGraphCanvas.get_tk_widget().pack(fill="x", expand=True, side="top")
@@ -53,6 +53,11 @@ class Stats(ctk.CTkFrame):
         
         plt.rcParams["axes.prop_cycle"] = plt.cycler(
         color=["#5e87f5", "#f0420f"])
+        COLOR = 'white'
+        plt.rcParams['text.color'] = COLOR
+        plt.rcParams['axes.labelcolor'] = COLOR
+        plt.rcParams['xtick.color'] = COLOR
+        plt.rcParams['ytick.color'] = COLOR
 
         dates = self.data["date"].tail(7).tolist()
         values = {
@@ -75,8 +80,8 @@ class Stats(ctk.CTkFrame):
         # Add some text for labels, title and custom x-axis tick labels, etc.
         ax.set_ylabel('')
         ax.set_title('')
-        ax.set_facecolor("#61686B")
+        ax.set_facecolor("#333333")
         ax.set_xticks(x + width, dates)
-        ax.legend(loc='upper right', ncols=3)
+        ax.legend(loc='upper right', ncols=3, facecolor="#303030")
 
         return (fig, ax)

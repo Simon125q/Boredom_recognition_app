@@ -75,8 +75,8 @@ class Settings(ctk.CTkFrame):
         self.entry.insert(0, self.min_time_break)
         self.entry.place(anchor="center", relx=0.9, rely=0.3)
 
-        time_label = ctk.CTkLabel(self, text="Minimum time between games (sec)", font=("Helvetica", 25, "bold"))
-        time_label.place(anchor="center", relx=0.65, rely=0.3)
+        time_label = ctk.CTkLabel(self, text="Min time between games (sec)", font=("Helvetica", 25, "bold"))
+        time_label.place(anchor="center", relx=0.68, rely=0.3)
 
     def toggle(self, button, description):
         current_state = self.toggle_states.get(description, 0)
