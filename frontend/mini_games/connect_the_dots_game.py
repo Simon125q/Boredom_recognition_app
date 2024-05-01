@@ -37,7 +37,6 @@ class TimerApp:
 
 class DotsGame(AbstractGame):
     def __init__(self) -> None:
-        print("dots game init")
         super().__init__()
 
     def restart(self) -> None:

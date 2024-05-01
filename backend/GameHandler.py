@@ -33,14 +33,12 @@ class GameHandler:
         self.gameStatus = False
         
     def handleGame(self) -> None:
-        mouth = self.marQueue.getMax(30)
-        eyes = self.earQueue.getMax(40)
+        mouth = self.marQueue.getMax(25)
+        eyes = self.earQueue.getMax(35)
         pose = self.poseQueue.getMax(150)
         print(mouth, eyes, pose)
         if mouth[0] == 'open' or eyes[0] in ["closed", "squinted"] or pose[0] == "half-lie":
-            print("game")
             self.gameStatus = True
-
             self.startTimer()
 
     def get_data(self, pose: str, pose_prob: float, ear: float, eyes: str, mar: float, mouth: str) -> None:
