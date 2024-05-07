@@ -4,6 +4,8 @@ import pandas as pd
 from random import choice
 from frontend.mini_games.connect_the_dots_game import DotsGame
 from frontend.mini_games.exercises_game import ExercisesGame 
+from frontend.mini_games.SnakeGame import SnakeGame
+from frontend.mini_games.example_game import ExampleGame
 from frontend.pages.Menu import Menu
 from frontend.pages.About import About
 from frontend.pages.Stats import Stats
@@ -88,6 +90,8 @@ class App(ctk.CTk):
             game = DotsGame()
         elif randGame == GameType.EXERCISE:
             game = ExercisesGame()
+        elif randGame == GameType.SNAKE:
+            game = SnakeGame()
         newPoints = game.show()
         self.points += newPoints
         

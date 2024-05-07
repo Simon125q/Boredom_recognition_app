@@ -14,10 +14,10 @@ To run this project locally, you need to have installed Python.
    python app.py
    ```
 4. To fine tune the model first run
-    ```
-    python DataColector.py
-    ```
-    in order to collect new data. Next run
+   ```
+   python DataColector.py
+   ```
+   in order to collect new data. Next run
 	```
 	python ModelTrainer.py
 	```
