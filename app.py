@@ -5,6 +5,7 @@ from random import choice
 from frontend.mini_games.connect_the_dots_game import DotsGame
 from frontend.mini_games.exercises_game import ExercisesGame 
 from frontend.mini_games.SnakeGame import SnakeGame
+from frontend.mini_games.alarm import AlarmGame
 from frontend.mini_games.example_game import ExampleGame
 from frontend.pages.Menu import Menu
 from frontend.pages.About import About
@@ -92,6 +93,8 @@ class App(ctk.CTk):
             game = ExercisesGame()
         elif randGame == GameType.SNAKE:
             game = SnakeGame()
+        elif randGame == GameType.ALARM:
+            game = AlarmGame()
         newPoints = game.show()
         self.points += newPoints
         
