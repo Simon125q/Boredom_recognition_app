@@ -74,6 +74,7 @@ class TimerFrame(ctk.CTkFrame):
         self.pause_button.pack_forget()
         self.resume_button.pack_forget()
         self.finish_button.pack_forget()
+        self.master.openMenu()
 
 
     def update_timer(self):
@@ -94,3 +95,6 @@ class AppStart(ctk.CTkFrame):
     def initView(self) -> None:
         self.timer_frame = TimerFrame(self)
         self.timer_frame.pack()
+
+    def openMenu(self):
+        self.master.openMenu()
