@@ -10,7 +10,7 @@ class Dot:
 
 
 def populate_patterns():
-    pattern_functions = [generate_rect_grid(), generate_spiral(), generate_concentric_circles(), generate_diamond_grid()]
+    pattern_functions = [generate_rect_grid(), generate_spiral(), generate_concentric_circles(), generate_diamond_grid(), generate_dolphin_grid()]
     patterns = []
     for pattern_func in pattern_functions:
         patterns.append(pattern_func)
