@@ -99,3 +99,33 @@ def generate_diamond_grid():
                 current_number += 1
 
     return diamond_dots
+
+
+def generate_dolphin_grid():
+    center_x = 700
+    center_y = 400
+    grid_size = 100
+    num_rows = 6
+    num_cols = 7
+
+    dolphin_dots = []
+    current_number = 1
+
+    for row in range(num_rows):
+        for col in range(num_cols):
+            x = center_x + (col - num_cols // 2) * grid_size
+            y = center_y + (row - num_rows // 2) * grid_size
+            if (row == 0 and col in (1, 2, 3)) or \
+               (row == 1 and col in (0, 4)) or \
+               (row == 2 and col in (0, 4, 5)) or \
+               (row == 3 and col in (0, 4, 5, 6)) or \
+               (row == 4 and col in (1, 2, 3, 4, 5)):
+                dolphin_dots.append(Dot(x, y, current_number))
+                current_number += 1
+
+    return dolphin_dots
+
+
+
+
+
