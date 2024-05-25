@@ -47,22 +47,19 @@ class AlarmGame(AbstractGame):
         else:
             self.play_alarm()
 
-    
     def play_alarm(self):
         pygame.mixer.init()
         pygame.mixer.music.load(self.alarm_sound)
         pygame.mixer.music.play()
-
 
     def turn_off_alarm(self):
         self.turn_off_button.configure(state=ctk.DISABLED)
         pygame.mixer.music.stop()
         self.close()
 
-
     def show(self) -> int:
-        self.root.master.wait_window(self.root)
-        return 0
+        self.root.master.wait_window(self.root)  # SCORE CALCULATION
+        return -50  # ??? idk how would that work, so... assume best case
 
 
 if __name__ == "__main__":

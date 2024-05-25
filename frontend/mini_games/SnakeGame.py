@@ -12,7 +12,7 @@ SNAKE_COLOUR = '#008000'
 FOOD_COLOUR = 'red'
 BACKGROUND_COLOUR = '#848482'
 WINNING_SCORE = 15
-
+INITIAL_RETURN_SCORE = -200
 
 class Snake:
     def __init__(self, canvas):
@@ -44,7 +44,7 @@ class SnakeGame(AbstractGame):
         #self.init_game()
 
     def restart(self) -> None:
-        self.return_score = 0
+        self.return_score = INITIAL_RETURN_SCORE  # start with -200
         global direction 
         direction = 'down'
         global score
@@ -152,22 +152,22 @@ class SnakeGame(AbstractGame):
         self.canvas.delete("all")
         self.canvas.create_text((self.canvas.winfo_width()/2, self.canvas.winfo_height()/2)
                         , font=("Arial", 69), text="YOU LOST", fill="red", tag="game_over")
-        if score >= WINNING_SCORE // 2:
-            self.return_score = 35
+        if score >= WINNING_SCORE // 2:   # SCORE CALCULATION
+            self.return_score = -100  # Points for being OK at snake :p
         else:
-            self.return_score = 0
+            self.return_score = -150     # Points for being BAD at snake :p
         self.close()
 
     def win(self):
         self.canvas.delete("all")
         self.canvas.create_text((self.canvas.winfo_width() / 2, self.canvas.winfo_height() / 2)
                         , font=("Arial", 69), text="YOU WON", fill="gold", tag="game_over")
-        self.return_score = 100
+        self.return_score = -50             # Points for being GOD at snake :p (i assume?)
         self.close()
 
     def show(self) -> int:
         self.restart()
         self.root.master.wait_window(self.root)
-        return self.return_score 
+        return self.return_score    # so, we have -150 for giga loss, -100 for minor loss, and -50 for giga-chadding
 
 

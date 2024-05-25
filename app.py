@@ -104,6 +104,13 @@ class App(ctk.CTk):
             self.detector.resetGameStatus()
             self.detector.gameHandler.startTimer()
 
+    def update_points_every_5_seconds(self):
+        self.points += 2
+        if self.running:  # check different thing if app doesnt work like that - for now it should do
+            self.master.after(5000, self.update_points_every_5_seconds)
+        else:
+            pass
+
     def close(self) -> None:
         self.detector.closeCamera()
         self.saveCurrData()
@@ -146,6 +153,7 @@ class App(ctk.CTk):
         self.appStart.pack_forget()
 
     def run(self) -> None:
+        self.update_points_every_5_seconds()
         while self.running:
             self.update_idletasks()
             self.update()

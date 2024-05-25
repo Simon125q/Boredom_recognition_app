@@ -91,8 +91,8 @@ class ExercisesGame(AbstractGame):
     def show(self) -> int:
         global score
         self.root.master.wait_window(self.root)
-        if self.finished_flag is True:
-            score = 100 - (abs(self.timer.seconds) // 2)
+        if self.finished_flag is True:            # SCORE CALCULATION
+            score = -200 + (150 - (abs(self.timer.seconds) // 2))  # initial -200, every second of delay equal "-2", with 0 delay being only -50
 
         return score
 

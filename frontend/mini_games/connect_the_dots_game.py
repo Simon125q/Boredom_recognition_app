@@ -105,9 +105,9 @@ class DotsGame(AbstractGame):
 
         if self.next_point_needed == len(self.points) + 1:
             self.info_label.configure(text="Congratulations! You've connected all dots.")
-            self.timer.running = False
-            score = 100 - (self.timer.seconds // 2)
-            self.close()
+            self.timer.running = False  # SCORE CALCULATION
+            score = -200 + (200 - (abs(self.timer.seconds) * 5))   # base -200, players with e.g. 10 seconds get (-200 + (200 - (10s * 5)) = 150
+            self.close()   # assume avg time of completion 10 s with only hover, granting the faster more or less 150 as in every game
 
     def draw_line(self, dot1, dot2) -> None:
         x1, y1 = dot1.x, dot1.y
