@@ -59,7 +59,11 @@ class AlarmGame(AbstractGame):
 
     def show(self) -> int:
         self.root.master.wait_window(self.root)  # SCORE CALCULATION
-        return -50  # ??? idk how would that work, so... assume best case
+        if self.remaining_time < 0:
+            score_time = 0
+        else:
+            score_time = self.remaining_time
+        return -50 + (-150 + (score_time * 5))  # for 30 second remaining (which is starting value?) we have only - 50, else more time results in points being decreased further.
 
 
 if __name__ == "__main__":
