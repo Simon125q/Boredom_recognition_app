@@ -1,7 +1,7 @@
 import customtkinter as ctk
 import time
 
-# to do save the time to file
+
 class TimerFrame(ctk.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
@@ -68,6 +68,7 @@ class TimerFrame(ctk.CTkFrame):
         if self.timer_id:
             self.after_cancel(self.timer_id)
             self.timer_id = None
+        self.master.updateTime(self.elapsed_time)
         self.elapsed_time = 0
         self.timer_label.configure(text="00:00:00")
         self.start_button.pack(pady=20)
@@ -95,6 +96,10 @@ class AppStart(ctk.CTkFrame):
     def initView(self) -> None:
         self.timer_frame = TimerFrame(self)
         self.timer_frame.pack()
+
+    def updateTime(self, elapsed_time):
+        minutes_spent = int(elapsed_time // 60)
+        self.master.timeSpend += minutes_spent
 
     def openMenu(self):
         self.master.openMenu()
