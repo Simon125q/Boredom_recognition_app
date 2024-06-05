@@ -33,9 +33,9 @@ class GameHandler:
         self.gameStatus = False
         
     def handleGame(self) -> None:
-        mouth = self.marQueue.getMax(25)
-        eyes = self.earQueue.getMax(35)
-        pose = self.poseQueue.getMax(150)
+        mouth = self.marQueue.getMax(22)
+        eyes = self.earQueue.getMax(30)
+        pose = self.poseQueue.getMax(250)
         print(mouth, eyes, pose)
         if mouth[0] == 'open' or eyes[0] in ["closed", "squinted"] or pose[0] == "half-lie":
             self.gameStatus = True

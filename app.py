@@ -47,6 +47,20 @@ class App(ctk.CTk):
             self.points = 0
             self.timeSpend = 0
 
+    def saveSessionData(self) -> None:
+        sessionData = dict()
+        last_row = self.data.iloc[-1]
+        sessionData["time_spend"] = self.timeSpend - last_row["time_spend"] 
+        sessionData["points"] = self.points - last_row["points"]
+        sessionData["open_games"] = self.games_counter
+        sessionData["min_set_time_bet_games"] = SETTINGS["breakTime"]
+        if sessionData["open_games"] != 0:
+            sessionData["avg_time_bet_games"] = sessionData["time_spend"] / sessionData["open_games"]
+        else:
+            sessionData["avg_time_bet_games"] = sessionData["time_spend"]
+        
+        pd.DataFrame(data=sessionData, index=[0]).to_excel("sessionsData/sessionData" + str(datetime.now()).split()[0] + ".xlsx")
+
     def saveCurrData(self) -> None:
         last_row = self.data.iloc[-1]
         today = datetime.now()
@@ -59,6 +73,7 @@ class App(ctk.CTk):
         self.data.to_csv("userData.csv", index=False) 
 
     def initGames(self) -> None:
+        self.games_counter = 0
         if SETTINGS["gamesEnable"]["DotsGame"]:
             self.games.append(GameType.DOTS)
         if SETTINGS["gamesEnable"]["Exercises"]:
@@ -86,6 +101,7 @@ class App(ctk.CTk):
         detector_thread.start()
 
     def startRandomGame(self) -> None:
+        self.games_counter += 1
         randGame = choice(self.games)
         if randGame == GameType.DOTS:
             game = DotsGame()
@@ -107,7 +123,7 @@ class App(ctk.CTk):
     def update_points_every_5_seconds(self):
         self.points += 2
         if self.running:  # check different thing if app doesnt work like that - for now it should do
-            self.master.after(5000, self.update_points_every_5_seconds)
+            self.after(5000, self.update_points_every_5_seconds)
         else:
             pass
 
@@ -140,6 +156,11 @@ class App(ctk.CTk):
     def openAbout(self) -> None:
         self.hideFrames()
         self.about.pack(fill="both", expand=True)
+    
+    def finishLearningSession(self) -> None:
+        self.hideFrames()
+        self.menu.pack(fill="both", expand=True)
+        self.saveSessionData()
 
     def openMenu(self) -> None:
         self.hideFrames()

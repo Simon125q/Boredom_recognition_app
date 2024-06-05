@@ -102,4 +102,4 @@ class AppStart(ctk.CTkFrame):
         self.master.timeSpend += minutes_spent
 
     def openMenu(self):
-        self.master.openMenu()
+        self.master.finishLearningSession()

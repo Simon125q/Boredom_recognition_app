@@ -7,6 +7,6 @@
         "TicTacToe": 0,
         "Alarm": 0
     },
-    "camera": 1,
-    "breakTime": 30
+    "camera": 0,
+    "breakTime": 60
 }
