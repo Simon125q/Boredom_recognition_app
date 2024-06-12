@@ -5,8 +5,8 @@
         "Snake": 1,
         "Memory": 0,
         "TicTacToe": 0,
-        "Alarm": 0
+        "Alarm": 1
     },
-    "camera": 0,
-    "breakTime": 60
+    "camera": 1,
+    "breakTime": 150
 }

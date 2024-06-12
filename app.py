@@ -53,7 +53,7 @@ class App(ctk.CTk):
         sessionData["time_spend"] = self.timeSpend - last_row["time_spend"] 
         sessionData["points"] = self.points - last_row["points"]
         sessionData["open_games"] = self.games_counter
-        sessionData["min_set_time_bet_games"] = SETTINGS["breakTime"]
+        sessionData["min_set_time_bet_games"] = round(SETTINGS["breakTime"] / 60, 2)
         if sessionData["open_games"] != 0:
             sessionData["avg_time_bet_games"] = sessionData["time_spend"] / sessionData["open_games"]
         else:
