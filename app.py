@@ -17,6 +17,7 @@ from settings import *
 from frontend.Detector import Detector
 import warnings
 import threading
+from frontend.mini_games.MemoryGame import MemoryGame
 warnings.filterwarnings("ignore")
 
 
@@ -111,6 +112,8 @@ class App(ctk.CTk):
             game = SnakeGame()
         elif randGame == GameType.ALARM:
             game = AlarmGame()
+        elif randGame == GameType.MEMORY:
+            game = MemoryGame()
         newPoints = game.show()
         self.points += newPoints
         
