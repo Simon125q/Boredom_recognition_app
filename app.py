@@ -59,7 +59,7 @@ class App(ctk.CTk):
         else:
             sessionData["avg_time_bet_games"] = sessionData["time_spend"]
         
-        pd.DataFrame(data=sessionData, index=[0]).to_excel("sessionsData/sessionData" + str(datetime.now()).split()[0] + ".xlsx")
+        pd.DataFrame(data=sessionData, index=[0]).to_excel("sessionsData/sessionData" + str(datetime.now()).replace(" ", "_") + ".xlsx")
 
     def saveCurrData(self) -> None:
         last_row = self.data.iloc[-1]
