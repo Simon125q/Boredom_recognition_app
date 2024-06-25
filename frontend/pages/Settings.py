@@ -7,6 +7,7 @@ class Settings(ctk.CTkFrame):
         super().__init__(master, **kwargs)
         self.master = master
         self.camera_enabled = 0
+        self.send_data_enable = 0
         self.min_time_break = "40"
         self.entry = None
         self.toggle_descriptions = ["DotsGame", "Exercises", "Snake", "Memory", "TicTacToe", "Alarm"]
@@ -22,12 +23,13 @@ class Settings(ctk.CTkFrame):
                 self.toggle_states = settings.get("gamesEnable", {})
                 self.camera_enabled = settings.get("camera", 0)
                 self.min_time_break = settings.get("breakTime", 0)
+                self.send_data_enable = settings.get("sendData", 0)
         except FileNotFoundError:
             self.toggle_states = {description: 0 for description in self.toggle_descriptions}
             self.camera_enabled = 0
 
     def save_settings(self):
-        settings = {"gamesEnable": self.toggle_states, "camera": self.camera_enabled, "breakTime": self.min_time_break}
+        settings = {"gamesEnable": self.toggle_states, "camera": self.camera_enabled, "breakTime": self.min_time_break, "sendData": self.send_data_enable}
         with open("mySettings.json", "w") as f:
             json.dump(settings, f, indent=4)
 

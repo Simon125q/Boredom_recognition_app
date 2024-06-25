@@ -34,6 +34,7 @@ class TimerFrame(ctk.CTkFrame):
 
 
     def start_timer(self):
+        self.master.master.startDetecting()
         self.start_button.pack_forget()
         self.pause_button.pack(pady=20)
         self.pause_button.configure(state="normal")

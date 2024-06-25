@@ -3,10 +3,11 @@
         "DotsGame": 1,
         "Exercises": 1,
         "Snake": 1,
-        "Memory": 0,
+        "Memory": 1,
         "TicTacToe": 0,
         "Alarm": 1
     },
     "camera": 1,
-    "breakTime": 150
+    "breakTime": 60,
+    "sendData": 1
 }

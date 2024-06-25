@@ -1,4 +1,6 @@
 import os
+import requests
+import json
 from datetime import datetime
 import pandas as pd
 from random import choice
@@ -49,6 +51,7 @@ class App(ctk.CTk):
             self.timeSpend = 0
 
     def saveSessionData(self) -> None:
+        url = 'http://localhost:5000/converter'
         sessionData = dict()
         last_row = self.data.iloc[-1]
         sessionData["time_spend"] = self.timeSpend - last_row["time_spend"] 
@@ -60,7 +63,18 @@ class App(ctk.CTk):
         else:
             sessionData["avg_time_bet_games"] = sessionData["time_spend"]
         
-        pd.DataFrame(data=sessionData, index=[0]).to_excel("sessionsData/sessionData" + str(datetime.now()).replace(" ", "_") + ".xlsx")
+        try:
+            if (SETTINGS["sendData"]):
+                #data = {'json': json.dumps(sessionData)}
+                response = requests.post(url, data=sessionData)
+                if response.status_code != 200:
+                    print(f"failed to send data: {response.status_code} {response.text}")
+            else:
+                print(type(sessionData))
+                print("data saved locally")
+        except:
+            print("connection failed")
+        pd.DataFrame(data=sessionData, index=[0]).to_excel("sessionsData/sessionData" + str(datetime.now()).replace(" ", "_").split(":")[0] + ".xlsx")
 
     def saveCurrData(self) -> None:
         last_row = self.data.iloc[-1]
@@ -98,8 +112,8 @@ class App(ctk.CTk):
         self.openMenu()
 
     def start_camera(self) -> None:
-        detector_thread = threading.Thread(target=self.detector.start)
-        detector_thread.start()
+        self.detector_thread = threading.Thread(target=self.detector.start)
+        self.detector_thread.start()
 
     def startRandomGame(self) -> None:
         self.games_counter += 1
@@ -142,10 +156,12 @@ class App(ctk.CTk):
         self.stats = Stats(self, self.data)
         self.settings = Settings(self)
         self.appStart = AppStart(self)
+        
+    def startDetecting(self) -> None:
+        self.start_camera()
 
     def startApp(self) -> None:
         self.hideFrames()
-        self.start_camera()
         self.appStart.pack(fill="both", expand=True)
 
     def openStats(self) -> None:
