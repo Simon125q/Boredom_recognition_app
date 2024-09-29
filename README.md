@@ -2,6 +2,8 @@
 
 **Focus Guard** is a Python-based application designed to help users stay focused during online classes and courses. By monitoring facial landmarks, body posture, and user activity through the camera, the app detects signs of distraction such as closed eyes, yawning, or slouching. It encourages users to regain focus by using **gamification techniques**, offering fun and interactive mini-games when attention lapses are detected. Users can earn or lose points based on their focus levels, and detailed statistics about learning habits and progress are tracked over time.
 
+![menu](https://github.com/Simon125q/Boredom_recognition_app/blob/main/scr_shots/title.jpg)
+
 ## Features
 
 ### Focus Monitoring
@@ -9,6 +11,8 @@
   - **EAR (Eye Aspect Ratio)**: Measures how open the user's eyes are.
   - **MAR (Mouth Aspect Ratio)**: Measures the degree of yawning.
 - **Posture Detection**: Checks if the user is sitting straight by using pose landmarks from **MediaPipe**, combined with a **Random Forest model** (trained with **scikit-learn**) to classify good and bad posture.
+
+![ear_mar](https://github.com/Simon125q/Boredom_recognition_app/blob/main/scr_shots/ear_mar.png)
 
 ### Gamification
 - **Mini-Games for Regaining Focus**: When the app detects that the user is distracted, mini-games are triggered to bring attention back to learning. These games include:
@@ -18,11 +22,17 @@
   - **Physical Activities**: Simple exercises to encourage physical movement.
   - **Quick Alarm**: A user needs to stop an alarm as quickly as possible to minimize point loss.
 
+![game1](https://github.com/Simon125q/Boredom_recognition_app/blob/main/scr_shots/game1.jpg)
+![game2](https://github.com/Simon125q/Boredom_recognition_app/blob/main/scr_shots/game2.jpg)
+![game3](https://github.com/Simon125q/Boredom_recognition_app/blob/main/scr_shots/game3.jpg)
+
 ### Points System and Statistics
 - **Points System**: Users earn points for staying focused and lose points when distractions are detected. If a distraction occurs, playing a mini-game can help regain some of the lost points.
 - **Statistics Page**:
   - Displays user's current level (based on total points accumulated).
   - Shows detailed statistics on time spent learning and points earned each day.
+
+![statistic](https://github.com/Simon125q/Boredom_recognition_app/blob/main/scr_shots/stats.jpg)
   
 ### User Interface
 - **Custom Tkinter GUI**: The application features an easy-to-use graphical user interface built using **Tkinter**, offering access to all functions such as starting focus sessions, viewing statistics, and playing mini-games.
@@ -38,6 +48,8 @@
 - **Pandas & Matplotlib**: For data storage, tracking focus history, and plotting learning statistics.
 
 ## How It Works
+
+![usage](https://github.com/Simon125q/Boredom_recognition_app/blob/main/scr_shots/webcam.jpg)
 
 1. **Focus Detection**:
    - The app continuously monitors the user's face and body using the camera.
@@ -106,5 +118,9 @@ The mini-games will automatically appear when the app detects a loss of focus. T
 - **Start Focus Session**: Click the "Start Focus" button to begin tracking your attention. The app will run in the background and alert you if distractions are detected.
 - **View Statistics**: Use the "Statistics" button to view your learning performance, including daily focus points, time spent on learning, and your current level.
 - **Mini-Games**: These will appear automatically during a focus session if the app detects you are losing attention. Try to win the games to regain lost focus points. You can customize which mini-games will be shown to you as well as they frequency in a settings page.
+
+![settings](https://github.com/Simon125q/Boredom_recognition_app/blob/main/scr_shots/settings.jpg)
+![about1](https://github.com/Simon125q/Boredom_recognition_app/blob/main/scr_shots/about1.jpg)
+![about2](https://github.com/Simon125q/Boredom_recognition_app/blob/main/scr_shots/about2.jpg)
 
 
